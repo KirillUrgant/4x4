@@ -1,20 +1,25 @@
 $(function () {
+    var time = 1000,
+        timeSlice = 400;
+
     function animateBlock (block) {
         block.addClass("item-block_active");
-        addConsole("animation start");
+        addConsole("item "+block.data('id')+" animation start");
 
         setTimeout(function() {
-            addConsole("animation end");
-            var next = block.parent().next().find(".item-block");
+            addConsole("item "+block.data('id')+" animation end");
+        }, time);
 
-            if (next.length) {
-                animateBlock(next)
+        setTimeout(function () {
+            var nextId = block.data('id') + 1,
+                nextItem = $("*[data-id='" + nextId + "']");
+
+            if (nextItem.length) {
+                animateBlock(nextItem)
             } else {
-                addConsole("end progress");
-                alert("Done!");
                 reset();
             }
-        }, 1000);
+        }, time - timeSlice);
 
         return true;
     }
@@ -24,8 +29,12 @@ $(function () {
     }
 
     function reset() {
-        $(".item-block").removeClass("item-block_active");
-        $(".button").text("start");
+        setTimeout(function () {
+            addConsole("end progress");
+            alert("Done!");
+            $(".item-block").removeClass("item-block_active");
+            $(".button").text("start");
+        }, timeSlice);
     }
 
     $(".button").on('click', function (e) {
@@ -33,6 +42,6 @@ $(function () {
         $(this).text("in progress...");
         addConsole("start progress");
 
-        animateBlock($(".col:first-child .item-block"));
+        animateBlock($("*[data-id='1']"));
     })
 });
