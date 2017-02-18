@@ -31,6 +31,8 @@ gulp.task('js', function () {
 gulp.task('sass', function () {
     return gulp.src(paths.sass)
         .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer())
+        .pipe(csso())
         .pipe(concat('bundle.css'))
         .pipe(gulp.dest('./dist/css'));
 });
