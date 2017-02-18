@@ -6,7 +6,7 @@ body {
 
 .row {
   width: 768px;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
 
   &:after {
     content: "";
@@ -23,7 +23,7 @@ body {
 }
 
 .item-block {
-  transition: all 0.3s linear;
+  transition: all 1s linear;
   background: #1ABC9C;
   color: #fff;
   width: 100px;
@@ -62,7 +62,7 @@ body {
   overflow-y: scroll;
   background: #2C3E50;
 
-  &_item {
+  &__item {
     color: white;
     font-family: monospace;
     font-weight: normal;
