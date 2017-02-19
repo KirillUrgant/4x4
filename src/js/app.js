@@ -1,6 +1,7 @@
 $(function () {
     var time = 1000,
-        timeSlice = 400;
+        timeSlice = 400,
+        $button = $(".button");
 
     function animateBlock (block) {
         block.addClass("item-block_active");
@@ -33,15 +34,21 @@ $(function () {
             addConsole("end progress");
             alert("Done!");
             $(".item-block").removeClass("item-block_active");
-            $(".button").text("start");
+            $button.text("start");
+            $button.on('click', buttonClick);
         }, timeSlice);
     }
 
-    $(".button").on('click', function (e) {
+    $button.on('click', buttonClick);
+
+    function buttonClick(e) {
         e.preventDefault();
-        $(this).text("in progress...");
+        var $this = $(this);
+
+        $this.text("in progress...");
         addConsole("start progress");
 
         animateBlock($("*[data-id='1']"));
-    })
+        $this.off('click');
+    }
 });
